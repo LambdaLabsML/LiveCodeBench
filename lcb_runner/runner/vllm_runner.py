@@ -23,6 +23,7 @@ class VLLMRunner(BaseRunner):
             disable_custom_all_reduce=True,
             enable_prefix_caching=args.enable_prefix_caching,
             trust_remote_code=args.trust_remote_code,
+            max_model_len=self.args.max_tokens,
         )
         self.sampling_params = SamplingParams(
             n=self.args.n,

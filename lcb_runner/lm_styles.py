@@ -30,6 +30,9 @@ class LMStyle(Enum):
     CodeQwenInstruct = "CodeQwenInstruct"
     QwQ = "QwQ"
     LLaMa3 = "LLaMa3"
+    LLaMa4Scout = "LLaMa4Scout"
+    LLaMa4Manual="LLaMa4Manual"
+    LLaMa4MaverickFP8="LLaMa4MaverickFP8"
     DeepSeekR1 = "DeepSeekR1"
 
     TogetherAI = "TogetherAI"
@@ -145,6 +148,20 @@ LanguageModelList: list[LanguageModel] = [
         LMStyle.LLaMa3,
         datetime(2023, 1, 1),
         link="https://huggingface.co/meta-llama/Llama-3.3-8B-Instruct",
+    ),
+    LanguageModel(
+        "meta-llama/Llama-4-Scout-17B-16E-Instruct",
+        "Llama-4-Scout-17B-16E-Instruct",
+        LMStyle.LLaMa4Scout,
+        datetime(2025, 5, 1),
+        link="https://huggingface.co/meta-llama/Llama-4-Scout-17B-16E-Instruct",
+    ),
+    LanguageModel(
+        "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8",
+        "Llama-4-Maverick-17B-128E-Instruct-FP8",
+        LMStyle.LLaMa4Scout,
+        datetime(2025, 5, 1),
+        link="https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8",
     ),
     ## Deepseek-Coder Base (33B, 6.7B, 1.3B)
     LanguageModel(
@@ -628,6 +645,20 @@ LanguageModelList: list[LanguageModel] = [
         LMStyle.CodeQwenInstruct,
         datetime(2024, 6, 30),
         link="https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct",
+    ),
+    LanguageModel(
+        "Qwen/Qwen3-30B-A3B",
+        "Qwen3-30B-A3B",
+        LMStyle.CodeQwenInstruct,
+        datetime(2024, 6, 30),
+        link="https://huggingface.co/Qwen/Qwen3-30B-A3B",
+    ),
+    LanguageModel(
+        "Qwen/Qwen3-235B-A22B",
+        "Qwen3-235B-A22B",
+        LMStyle.CodeQwenInstruct,
+        datetime(2024, 6, 30),
+        link="https://huggingface.co/Qwen/Qwen3-235B-A22B",
     ),
     LanguageModel(
         "azerogpt",

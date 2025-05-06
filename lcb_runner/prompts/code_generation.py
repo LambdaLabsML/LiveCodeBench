@@ -25,6 +25,10 @@ class PromptConstants:
 
     SYSTEM_MESSAGE_QWEN_QWQ = f"<|im_start|>system\nYou are a helpful and harmless assistant. You are Qwen developed by Alibaba. You should think step-by-step.<|im_end|>\n<|im_start|>user"
 
+    SYSTEM_MESSAGE_LLAMA4 = (
+        f"<|begin_of_text|><|header_start|>system<|header_end|>\n\nYou are an expert Python programmer. You will be given a question (problem specification) and will generate a correct Python program that matches the specification and passes all tests. Think very carefully before coding.<|eot|><|header_start|>user<|header_end|>\n\n"
+    )
+
     SYSTEM_MESSAGE_DEEPSEEK_R1 = (
         "<｜begin▁of▁sentence｜>A conversation between User and Assistant. "
         "The user asks a question, and the Assistant solves it. "
@@ -275,6 +279,65 @@ def format_prompt_generation(
             padding=False,
         )
 
+    if LanguageModelStyle == LMStyle.LLaMa4Scout:
+        chat_messages = [
+            {
+                "role": "system",
+                "content": PromptConstants.SYSTEM_MESSAGE_GENERIC,
+            },
+        ]
+        chat_messages += [
+            {
+                "role": "user",
+                "content": get_generic_question_template_answer(question),
+            },
+        ]
+        from transformers import AutoTokenizer
+
+        tokenizer = AutoTokenizer.from_pretrained(
+            "meta-llama/Llama-4-Scout-17B-16E-Instruct", padding_side="left", use_fast=True
+        )
+        prompt = tokenizer.apply_chat_template(
+            chat_messages,
+            tokenize=False,
+            add_generation_prompt=True,
+            truncation=False,
+            padding=False,
+        )
+        return prompt
+
+    if LanguageModelStyle == LMStyle.LLaMa4MaverickFP8:
+        chat_messages = [
+            {
+                "role": "system",
+                "content": PromptConstants.SYSTEM_MESSAGE_GENERIC,
+            },
+        ]
+        chat_messages += [
+            {
+                "role": "user",
+                "content": get_generic_question_template_answer(question),
+            },
+        ]
+        from transformers import AutoTokenizer
+
+        tokenizer = AutoTokenizer.from_pretrained(
+            "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8", padding_side="left", use_fast=True
+        )
+        prompt = tokenizer.apply_chat_template(
+            chat_messages,
+            tokenize=False,
+            add_generation_prompt=True,
+            truncation=False,
+            padding=False,
+        )
+        return prompt
+
+    if LanguageModelStyle == LMStyle.LLaMa4Manual:
+        prompt = f"{PromptConstants.SYSTEM_MESSAGE_LLAMA4}\n\n"
+        prompt += f"{get_generic_question_template_answer(question)}<|eot|>\n<|header_start|>assistant<|header_end|>"
+        return prompt
+
     if LanguageModelStyle == LMStyle.Claude:
         prompt = f"{HUMAN_PROMPT}\n"
         prompt += f"{PromptConstants.SYSTEM_MESSAGE_GENERIC}\n\n"
@@ -323,6 +386,9 @@ def format_prompt_generation(
     if LanguageModelStyle == LMStyle.CodeQwenInstruct:
         prompt = f"{PromptConstants.SYSTEM_MESSAGE_CODEQWEN}\n\n"
         prompt += f"{get_codeqwen_question_template_answer(question)}"
+        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        print(prompt)
+        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
         return prompt
 
     if LanguageModelStyle == LMStyle.QwQ:
