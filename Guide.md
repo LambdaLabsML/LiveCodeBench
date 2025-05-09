@@ -7,7 +7,7 @@
 |--------------|----------:|-----------:|
 | Reference    |      62.6 |       70.7 |
 | Reproduction |      62.0 |       70.9 |
-| Chartness    |  13493.05 |   12389.73 |
+| Chatness    |  13493.05 |   12389.73 |
 
 * Chatness is the averaged number of tokens generated for a single problem.
 
