@@ -1,9 +1,9 @@
-# Produce LiveCodeBench Results
+# Reproduce LiveCodeBench Results
 
 
 ## Results
 
-| Method       | Qwen3-30B | Qwen3-235B |
+| Method       | Qwen3-30B-A3B | Qwen3-235B-A22B |
 |--------------|----------:|-----------:|
 | Reference    |      62.6 |       70.7 |
 | Reproduction |      62.0 |       70.9 |
