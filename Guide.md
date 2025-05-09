@@ -7,9 +7,9 @@
 |--------------|----------:|-----------:|
 | Reference    |      62.6 |       70.7 |
 | Reproduction |      62.0 |       70.9 |
-| Chatness    |  13493.05 |   12389.73 |
+| Chattiness    |  13493.05 |   12389.73 |
 
-* Chatness is the averaged number of tokens generated for a single problem.
+* Chattiness is the averaged number of tokens generated for a single problem.
 * Raw outputs can be found in the `./ouptut` folder.
 
 ## Setup
