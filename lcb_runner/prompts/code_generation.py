@@ -386,9 +386,6 @@ def format_prompt_generation(
     if LanguageModelStyle == LMStyle.CodeQwenInstruct:
         prompt = f"{PromptConstants.SYSTEM_MESSAGE_CODEQWEN}\n\n"
         prompt += f"{get_codeqwen_question_template_answer(question)}"
-        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-        print(prompt)
-        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
         return prompt
 
     if LanguageModelStyle == LMStyle.QwQ:
