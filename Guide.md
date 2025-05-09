@@ -10,6 +10,7 @@
 | Chatness    |  13493.05 |   12389.73 |
 
 * Chatness is the averaged number of tokens generated for a single problem.
+* Raw outputs can be found in the `/ouptut` folder.
 
 ## Setup
 ```
