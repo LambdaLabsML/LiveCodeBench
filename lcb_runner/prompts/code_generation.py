@@ -398,6 +398,11 @@ def format_prompt_generation(
         prompt += f"{get_deepseek_r1_question_template_answer(question)}"
         return prompt
 
+    if LanguageModelStyle == LMStyle.DeepSeekR1Code:
+        prompt = f"{PromptConstants.SYSTEM_MESSAGE_GENERIC}"
+        prompt += f"{get_deepseek_r1_question_template_answer(question)}"
+        return prompt
+
     if LanguageModelStyle == LMStyle.GenericBase:
         prompt = get_base_model_question_template_answer(question)
         return prompt

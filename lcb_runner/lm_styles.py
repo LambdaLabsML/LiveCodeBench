@@ -34,6 +34,7 @@ class LMStyle(Enum):
     LLaMa4Manual="LLaMa4Manual"
     LLaMa4MaverickFP8="LLaMa4MaverickFP8"
     DeepSeekR1 = "DeepSeekR1"
+    DeepSeekR1Code = "DeepSeekR1Code"
 
     TogetherAI = "TogetherAI"
 
@@ -734,7 +735,7 @@ LanguageModelList: list[LanguageModel] = [
     LanguageModel(
         "deepseek-ai/DeepSeek-R1-Distill-Llama-70B",
         "DeepSeek-R1-Distill-Llama-70B",
-        LMStyle.DeepSeekR1,
+        LMStyle.DeepSeekR1Code,
         datetime(2025, 1, 20),
         link="https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Llama-70B",
     ),

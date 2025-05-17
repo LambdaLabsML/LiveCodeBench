@@ -3,14 +3,15 @@
 
 ## Results
 
-| Method       | Qwen3-30B-A3B | Qwen3-235B-A22B |
-|--------------|----------:|-----------:|
-| Reference    |      62.6 |       70.7 |
-| Reproduction |      62.0 |       70.9 |
-| Chattiness    |  13493.05 |   12389.73 |
+| Method       | Qwen3-30B-A3B | Qwen3-235B-A22B | DeepSeek-R1-Distill-Llama-70B |
+|--------------|----------:|-----------:|-----------:| 
+| Reference    |      62.6 |       70.7 |  n/a |
+| Reproduction |      62.0 |       70.9 |  55.4 |
+| Chattiness    |  13493.05 |   12389.73 | 9515.17 |
 
 * Chattiness is the averaged number of tokens generated for a single problem.
 * Raw outputs can be found in the `./ouptut` folder.
+* The above scores are generated using `release_v5` and questions between 2024-10-01 and 2025-02-01. DeepSeek reported `57.5` for DeepSeek-R1-Distill-Llama-70B using questions between 2024-08-01 and 2025-01-01. We were able to reproduce with a score of `57.4`.
 
 ## Setup
 ```
@@ -57,4 +58,23 @@ python3 -m lcb_runner.evaluation.compute_scores \
 python3 compute_token.py \
 ./output/Qwen3-235B-A22B/Scenario.codegeneration_1_0.2_eval_all.json \
 Qwen/Qwen3-235B-A22B
+```
+
+## DeepSeek-R1-Distill-Llama-70B
+Notice we set `temperature=0.6` which increases the score by about 5 points. The default `0.2` setting causes endless, repetitive reasoning.
+
+```
+python3 -m lcb_runner.runner.main \
+--model deepseek-ai/DeepSeek-R1-Distill-Llama-70B --scenario codegeneration \
+--evaluate --release_version release_v5 --n 1 \
+--max_tokens 65536 --stop '<｜end▁of▁sentence｜>' \
+--start_date 2024-10-01 --end_date 2025-02-01 --temperature 0.6
+
+python3 -m lcb_runner.evaluation.compute_scores \
+--eval_all_file output/DeepSeek-R1-Distill-Llama-70B/Scenario.codegeneration_1_0.6_eval_all.json \
+--start_date 2024-10-01 --end_date 2025-02-01
+
+python3 compute_token.py \
+./output/DeepSeek-R1-Distill-Llama-70B/Scenario.codegeneration_1_0.6_eval_all.json \
+deepseek-ai/DeepSeek-R1-Distill-Llama-70B
 ```
