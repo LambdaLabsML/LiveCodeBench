@@ -96,13 +96,13 @@ meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8
 ```
 
 ## DeepSeek-R1-Distill-Llama-70B
-Notice we set `temperature=0.6` which increases the score by about 5 points. The default `0.2` setting causes endless, repetitive reasoning.
+Notice we set `temperature=0.6` which increases the score by about 5 points compared to the default `0.2` setting.
 
 ```
 python3 -m lcb_runner.runner.main \
 --model deepseek-ai/DeepSeek-R1-Distill-Llama-70B --scenario codegeneration \
 --evaluate --release_version release_v5 --n 1 \
---max_tokens 65536 --stop '<｜end▁of▁sentence｜>' \
+--max_tokens 32768 --stop '<｜end▁of▁sentence｜>' \
 --start_date 2024-10-01 --end_date 2025-02-01 --temperature 0.6
 
 python3 -m lcb_runner.evaluation.compute_scores \
